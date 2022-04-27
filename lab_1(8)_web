@@ -1,0 +1,25 @@
+#!/bin/bash
+
+echo "Введите путь до файла, указав расширение"
+read file
+
+echo "Введите директорию, куда нужно скопировать файл"
+read new_dir
+
+
+if ! [ -a $file ]
+then
+   echo "Данный файл не существует"
+   exit 1
+fi
+
+if ! [ -d $new_dir ]
+then
+   echo "Данной директории не существует"
+   exit 2
+fi
+
+file_name="${file##*/}"
+file_base="${file_name%.[^.]*}"
+
+cp $file $new_dir/$file_base.backup
